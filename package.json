@@ -1,0 +1,29 @@
+{
+  "name": "zunefy",
+  "version": "1.0.0",
+  "description": "A Spotify Web API CRUD with a Microsoft Zune UI inspiration.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jack-mad/Zunefy.git"
+  },
+  "author": "Joaquin Velazquez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jack-mad/Zunefy/issues"
+  },
+  "homepage": "https://github.com/jack-mad/Zunefy#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-mongo": "^4.6.0",
+    "dotenv": "^16.0.0",
+    "express-session": "^1.17.2",
+    "hbs": "^4.2.0",
+    "mongoose": "^6.2.1",
+    "morgan": "^1.10.0",
+    "spotify-web-api-node": "^5.0.2"
+  }
+}
