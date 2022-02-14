@@ -1,0 +1,31 @@
+/* Zune Colors 
+Pantone Orange 21C = 254,80,0 - #fe5000
+Pantone Process Magenta C = 217,1,122 - #d9017a
+Pantone 426C = 37,40,42 - #25282a
+Pantone 8001C = 141,140,138 - #8d8c8a
+Pantone Cool Grey 10C = 102,103,108 - #66676c
+Pantone Cool Grey 8C = 143,144,146 - #8f9092
+Pantone Cool Grey 3C = 202,202,199 - #cacac7
+Pantone Cool Grey 1C = 221,221,218 - #ddddda
+White = 
+
+
+*/
+
+body{
+    font-family:'Segoe UI';
+}
+h1{
+    font-weight: lighter;
+    letter-spacing:-3px;
+    /* color: linear-gradient(90deg, rgba(254,80,0,1) 0%, rgba(217,2,125,1) 100%); */
+    color: #d9017a;
+}
+
+/* classes */
+.energy-bar{
+    background: linear-gradient(0deg, rgba(254,80,0,1) 0%, rgba(217,1,122,1) 100%);
+    width: 1vw;
+    height: auto;
+    margin-right: 1vw;
+}
