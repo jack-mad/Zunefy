@@ -4,7 +4,7 @@ const router = express.Router();
 const myQueueCtrl = require('../controllers/myQueueCtrl');
 
 //routes
-router.get('/', myQueueCtrl.getLists);
+
 router.get('/view/:id', myQueueCtrl.getViewList);
 
 router.get('/new', myQueueCtrl.getNewList);

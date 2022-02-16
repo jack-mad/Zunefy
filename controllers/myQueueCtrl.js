@@ -4,17 +4,20 @@ const Song = require('./../models/Song')
 
 exports.getLists = async (req, res) => {
     const lists = await List.find({});
-    res.render('myqueue', { all: lists});
+    console.log(lists)
+    res.render('myqueue', { alllists: lists });
 }
 
 exports.getViewList = async (req, res) => {
+    const lists = await List.find({});
     const { id } = req.params;
     const getOneList = await List.findById( id ).populate('songs');
-    res.render('myqueue', { details: getOneList });
+    res.render('myqueue', { details: getOneList , alllists: lists});
 }
 
-exports.getNewList = (req, res) => {
-    res.render('myqueue', { newlist: true });
+exports.getNewList = async (req, res) => {
+    const lists = await List.find({});
+    res.render('myqueue', { newlist: true , alllists: lists});
 }
 
 exports.postNewList = async (req, res) => {
@@ -30,9 +33,10 @@ exports.postNewList = async (req, res) => {
 
 
 exports.getEditList = async (req, res) => {
+    const lists = await List.find({});
     const { id } = req.params;
-    const getOneList = await List.findById( id ).populate('songs');
-    res.render('myqueue', { editlist: getOneList , edit: true });
+    const getOneList = await List.findById(id).populate('songs');
+    res.render('myqueue', { editlist: getOneList , edit: true , alllists: lists});
 }
 
 exports.postEditList = async (req, res) => {
