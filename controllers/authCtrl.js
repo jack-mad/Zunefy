@@ -49,23 +49,31 @@ exports.postSignin = async (req, res) => {
         res.render('auth/signin',{
             errorMessage: 'Usuario no encontrado. Revisa tus credenciales.'
         })
-    } else {
-        const verifyPass = await bcryptjs.compareSync(password,foundUser.password)
-        console.log(verifyPass);
-        if(!verifyPass){
-            res.render('auth/signin',{
-                errorMessage: 'Contraseña incorrecta. Revisa tus credenciales.'
-            });
-            return;
-        }
-        //sesion
-        const usr = req.session.currentUser = {
-            _id: foundUser._id,
-            username: foundUser.username,
-            msg: "musiCortex golden ticket"
-        }
-        console.log(usr);
+        return
     }
+    const verifyPass = await bcryptjs.compareSync(password,foundUser.password)
+    console.log(verifyPass);
+    if(!verifyPass){
+        res.render('auth/signin',{
+            errorMessage: 'Contraseña incorrecta. Revisa tus credenciales.'
+        });
+        return;
+    }
+    
+      
+   
+    //sesion
+    const usr = req.session.currentUser = {
+        _id: foundUser._id,
+        username: foundUser.username,
+        name: foundUser.name,
+        avatar: foundUser.avatar,
+        storage: foundUser.storage,
+        connected: foundUser.connected,
+        myqueues: foundUser.myqueues,
+        msg: "musiCortex golden ticket"
+    }
+    console.log(usr);
     return res.redirect('/')
     
 }

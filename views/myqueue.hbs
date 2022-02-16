@@ -5,14 +5,18 @@
     <!-- This example requires Tailwind CSS v2.0+ -->
     <h1 class="text-left text-6xl mb-5 text-zorange font-thin tracking-tighter lg:text-7xl">lists</h1>
     <ul role="list" class="space-y-3">
+      {{#if newlist}}
       <li class="bg-black shadow overflow-hidden rounded-md px-6 py-4">
         <!-- Your content -->
       </li>
-      
       <button type="button" class=" w-full text-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-zmagenta hover:bg-zorange focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zorange">
-          create new
-        </button>
-      
+        save list
+      </button>
+      {{else}}
+      <a href="/myqueue/new" class="block w-full text-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-zmagenta hover:bg-zorange focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zorange">
+        create new
+      </a>
+      {{/if}}
 
       <!-- More items... -->
     </ul>

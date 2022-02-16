@@ -23,11 +23,18 @@
             {{!-- <a href="/acerca" class="text-3xl font-thin tracking-tighter text-zmagenta hover:text-zorange"> acerca </a> --}}
             </div>
         </div>
+        {{#if currentUser}}
         <div class="ml-10 space-x-4">
-            <img class="inline-block h-8 w-8 rounded-full" src="https://www.tenforums.com/geek/gars/images/2/types/thumb_14400082930User.png" alt="">
+            <img class="inline-block h-8 w-8 rounded-full" src="{{ currentUser.avatar }}" alt="">
+            <a href="/auth/user" class="inline-block py-2 px-4 border border-transparent rounded-md text-base font-medium text-zgray-3 hover:text-zorange">Howdy, {{ currentUser.name }} </a>
+            <a href="/auth/signout" class="inline-block py-2 px-4 border border-transparent rounded-md text-base font-medium text-zgray-3 hover:text-zorange">Sign out</a>
+        </div>
+        {{else}}
+        <div class="ml-10 space-x-4">
             <a href="/auth/signin" class="inline-block py-2 px-4 border border-transparent rounded-md text-base font-medium text-zgray-3 hover:text-zorange">Sign in</a>
             <a href="/auth/signup" class="inline-block py-2 px-4 border border-transparent rounded-md text-base font-medium text-zgray-3 hover:text-zorange">Sign up</a>
         </div>
+        {{/if}}
         </div>
         <div class="py-4 flex flex-wrap justify-center space-x-6 lg:hidden">
             <a href="/discover" class="text-3xl font-thin tracking-tighter text-zmagenta hover:text-zorange"> discover </a>
@@ -49,7 +56,7 @@
                 <a href="" class="text-2xl font-thin tracking-tighter text-zmagenta hover:text-zorange"> dispositivo cerebral conectado </a>
             </div>
             <div class="mt-8 md:mt-0 ">
-            <p class="text-center text-base text-zgray-10">&copy; 2022 jackscript. All rights reserved.</p>
+            <p class="text-center text-base text-zgray-10">&copy; 2022 jackscript.dev</p>
             </div>
         </div>
     </footer>

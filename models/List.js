@@ -3,7 +3,6 @@ const mongoose = require('mongoose')
 const ListSchema = mongoose.Schema({
     name:{
         type: String,
-        trim: true,
         required: true
     },
     songs: [{
