@@ -12,11 +12,11 @@ const userSchema = mongoose.Schema({
     },
     name: {
         type:String,
-        default: "cute person"
+        default: "cute girl"
     },
     avatar:{
         type:String,
-        default: "https://www.tenforums.com/geek/gars/images/2/types/thumb_14400082930User.png"
+        default: "https://i.pinimg.com/550x/51/0b/fb/510bfb16b32f08aff3938a0cbcb847a2.jpg"
     },
     storage:{
         type: Number,

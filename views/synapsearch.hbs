@@ -55,23 +55,46 @@
     {{#each search}}
       <li class="relative">
         <div
-          class="group block w-full aspect-w-10 aspect-h-7 bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-zorange overflow-hidden"
+          class="group block w-full aspect-w-10 aspect-h-7 bg-zorange focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-zorange overflow-hidden"
         >
-          <a href="/music/album/{{this.album.id}}"><img
+        {{!-- /music/album/{{this.album.id}} --}}
+          <a href=""><img 
               src="{{this.album.images.1.url}}"
               alt=""
               class="object-cover pointer-events-none group-hover:opacity-75"
             /></a>
         </div>
-        <p
-          class="mt-2 block text-md font-medium text-zmagenta truncate pointer-events-none"
-        >{{name}}</p>
-        {{#each artists}}
-          <a
-            href="/music/artist/{{this.id}}"
-            class="text-sm font-ligth text-white"
-          >{{this.name}} </a>
-        {{/each}}
+        <div class="flex justify-between">
+          <span class="truncate w-5/6">
+            <p
+              class="mt-2 block text-md font-medium text-zmagenta pointer-events-none"
+            >{{name}}</p>
+            {{#each artists}}
+              <a
+                href="/music/artist/{{this.id}}"
+                class="text-sm font-ligth text-white"
+              >{{this.name}} </a>
+            {{/each}}
+          </span>
+          <span class="truncate">
+            <form action="/synapsearch">
+              input
+              <button type="submit" class="mt-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-zmagenta" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
+                </svg>
+              </button>
+            </form>
+          </span>
+          
+        </div>
+        {{#if this.preview_url}}
+          <audio class="mt-3 h-8 w-full"src={{this.preview_url}} controls></audio>
+          {{else}}
+          <p class="mt-2 block text-md font-medium text-zorange truncate pointer-events-none"
+            >Preview not available</p>
+          {{/if}}
+        
       </li>
     {{/each}}
   </ul>
