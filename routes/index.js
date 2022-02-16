@@ -7,6 +7,7 @@ const myQueueCtrl = require('../controllers/myQueueCtrl');
 
 //routes
 router.get('/', spotifyCtrl.getFeed, indexCtrl.getHome);
+router.get('/synapsearch', spotifyCtrl.searchTracks, indexCtrl.synapSearch);
 router.get('/about', indexCtrl.getAbout);
 router.get('/discover', spotifyCtrl.getFeed, indexCtrl.getHome);
 router.get('/myqueue', myQueueCtrl.getLists, indexCtrl.getMyQueue);

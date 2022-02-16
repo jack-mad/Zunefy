@@ -1,4 +1,5 @@
 const SpotifyWebApi = require('spotify-web-api-node');
+const { search } = require('../routes');
 
 const spotifyApi = new SpotifyWebApi({
     clientId: process.env.CLIENT_ID,
@@ -41,4 +42,14 @@ exports.getArtist = async (req, res) => {
         console.log("Something went wrong!", error);
     }
     
+}
+exports.searchTracks = async (req, res) => {
+    const query = req.query.q
+    try {
+        const search = await spotifyApi.searchTracks(query);
+        console.log(search.body.tracks.items);
+        return res.render('synapsearch', { search: search.body.tracks.items })
+    } catch (error) {
+        console.log(error);
+    }
 }

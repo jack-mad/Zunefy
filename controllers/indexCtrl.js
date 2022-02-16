@@ -10,3 +10,6 @@ exports.getMyQueue = (req, res) => {
 exports.getRandOmatic = (req, res) => {
     res.render('randomatic');
 }
+exports.synapSearch = (req, res) => {
+    res.render('synapsearch');
+}
