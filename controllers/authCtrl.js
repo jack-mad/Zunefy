@@ -58,8 +58,24 @@ exports.postSignin = async (req, res) => {
             });
             return;
         }
+        //sesion
+        const usr = req.session.currentUser = {
+            _id: foundUser._id,
+            username: foundUser.username,
+            msg: "musiCortex golden ticket"
+        }
+        console.log(usr);
     }
     return res.redirect('/')
     
 }
 
+exports.signout = (req, res) => {
+    req.session.destroy(()=> {
+        res.redirect('/')
+    });
+}
+
+exports.getUser = async (req, res) => {
+    res.render('auth/user');
+}

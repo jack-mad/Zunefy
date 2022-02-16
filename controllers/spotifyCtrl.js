@@ -12,7 +12,7 @@ const spotifyApi = new SpotifyWebApi({
 
 exports.getFeed = async (req, res) => {
     try {
-        const data = await spotifyApi.getNewReleases({ limit : 10, offset: 0, country: 'MX' });
+        const data = await spotifyApi.getNewReleases({ limit : 10, offset: 0, country: 'us' });
         console.log(data.body.albums.items[9].artists);
         return res.render('index', { novedades: data.body.albums.items});
     } catch (error) {

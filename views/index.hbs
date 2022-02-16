@@ -1,16 +1,82 @@
-<h1 class="text-8xl mb-5 text-zorange font-thin tracking-tighter lg:text-9xl">Novedades en México</h1>
+<h1
+  class="text-8xl mb-2 text-zmagenta font-thin tracking-tighter lg:text-9xl"
+>discover</h1>
 
-<ul role="list" class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-5 xl:gap-x-8">
-  {{#each novedades}}
-  <li class="relative">
-    <div class="group block w-full aspect-w-10 aspect-h-7 bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-zorange overflow-hidden">
-      <a href="/music/album/{{this.id}}"><img src="{{this.images.0.url}}" alt="" class="object-cover pointer-events-none group-hover:opacity-75"></a>
+<h1
+  class="text-6xl mb-5 text-zorange font-thin tracking-tighter lg:text-7xl"
+>synapSearch</h1>
+
+<div class="mb-5">
+
+  <div>
+    <div class="mt-1 flex rounded-md shadow-sm">
+      <div class="relative flex items-stretch flex-grow focus-within:z-10">
+        <input
+          type="email"
+          name="email"
+          id="email"
+          class="h-16 focus:ring-zmagenta focus:border-zmagenta bg-black text-zorange font-thin tracking-tighter block w-full rounded-none rounded-l-md pl-10 sm:text-xl border-gray-300 lg:text-3xl"
+          placeholder="search artist, albums and songs"
+        />
+      </div>
+      <button
+        type="submit"
+        class="-ml-px relative inline-flex items-center space-x-2 px-4 py-2 border border-gray-300 text-sm font-medium rounded-r-md text-gray-700 bg-zmagenta hover:bg-zorange focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+      >
+        <!-- Heroicon name: solid/sort-ascending -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="white"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+          ></path>
+        </svg>
+      </button>
     </div>
-    <p class="mt-2 block text-md font-medium text-zmagenta truncate pointer-events-none">{{this.name}}</p>
-    {{#each artists}}
-        <a href="/music/artist/{{this.id}}" class="text-sm font-ligth text-white">{{this.name}} </a>
+  </div>
+</div>
+
+<h1
+  class="text-right text-6xl mb-5 text-zorange font-thin tracking-tighter lg:text-7xl"
+>newbies in mx</h1>
+
+<div class="mb-5">
+  <ul
+    role="list"
+    class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-5 xl:gap-x-8"
+  >
+    {{#each novedades}}
+      <li class="relative">
+        <div
+          class="group block w-full aspect-w-10 aspect-h-7 bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-zorange overflow-hidden"
+        >
+          <a href="/music/album/{{this.id}}"><img
+              src="{{this.images.0.url}}"
+              alt=""
+              class="object-cover pointer-events-none group-hover:opacity-75"
+            /></a>
+        </div>
+        <p
+          class="mt-2 block text-md font-medium text-zmagenta truncate pointer-events-none"
+        >{{this.name}}</p>
+        {{#each artists}}
+          <a
+            href="/music/artist/{{this.id}}"
+            class="text-sm font-ligth text-white"
+          >{{this.name}} </a>
+        {{/each}}
+      </li>
     {{/each}}
-  </li>
-  {{/each}}
-  <!-- More files... -->
-</ul>
+  </ul>
+</div>
+
+<div>
+  <br><br><br><br><br><br><br>
+</div>
