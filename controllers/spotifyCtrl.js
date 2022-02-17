@@ -13,7 +13,7 @@ const spotifyApi = new SpotifyWebApi({
 
 exports.getFeed = async (req, res) => {
     try {
-        const data = await spotifyApi.getNewReleases({ limit : 10, offset: 0, country: 'us' });
+        const data = await spotifyApi.getNewReleases({ limit : 10, offset: 0, country: 'mx' });
         // console.log(data.body.albums.items[9].artists);
         return res.render('index', { novedades: data.body.albums.items});
     } catch (error) {
@@ -41,14 +41,13 @@ exports.getArtist = async (req, res) => {
     } catch (error) {
         console.log("Something went wrong!", error);
     }
-    
 }
 exports.searchTracks = async (req, res) => {
     const query = req.query.q
     try {
         const search = await spotifyApi.searchTracks(query);
-        console.log(search.body.tracks.items);
-        return res.render('synapsearch', { search: search.body.tracks.items })
+        // console.log(search.body.tracks.items);
+        return res.render('synapsearch', { search: search.body.tracks.items , query: query });
     } catch (error) {
         console.log(error);
     }

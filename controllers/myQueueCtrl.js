@@ -1,7 +1,6 @@
 const List = require('./../models/List')
 const Song = require('./../models/Song')
 
-
 exports.getLists = async (req, res) => {
     const lists = await List.find({});
     console.log(lists)
@@ -11,7 +10,8 @@ exports.getLists = async (req, res) => {
 exports.getViewList = async (req, res) => {
     const lists = await List.find({});
     const { id } = req.params;
-    const getOneList = await List.findById( id ).populate('songs');
+    const getOneList = await List.findById(id).populate('songs');
+    console.log(getOneList)
     res.render('myqueue', { details: getOneList , alllists: lists});
 }
 
@@ -22,8 +22,9 @@ exports.getNewList = async (req, res) => {
 
 exports.postNewList = async (req, res) => {
     const { name } = req.body;
+    const createdby = req.session.currentUser.username
     try {
-        const nl = await List.create({ name, type: 'myQueue' });
+        const nl = await List.create({ name, type: 'myQueue', createdby});
         console.log(nl)
         res.redirect('/myqueue')
     } catch (error) {
@@ -31,12 +32,12 @@ exports.postNewList = async (req, res) => {
     }
 }
 
-
 exports.getEditList = async (req, res) => {
     const lists = await List.find({});
+    const allUserSongs = await Song.find({});
     const { id } = req.params;
     const getOneList = await List.findById(id).populate('songs');
-    res.render('myqueue', { editlist: getOneList , edit: true , alllists: lists});
+    res.render('myqueue', { editlist: getOneList , edit: true , alllists: lists , allUserSongs: allUserSongs});
 }
 
 exports.postEditList = async (req, res) => {

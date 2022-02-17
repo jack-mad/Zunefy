@@ -3,10 +3,14 @@
 <div class="mb-5 flex flex-row flex-wrap">
 <div class="basis-1/3 pr-3">
     <!-- This example requires Tailwind CSS v2.0+ -->
-    <h1 class="text-left text-6xl mb-5 text-zorange font-thin tracking-tighter lg:text-7xl">lists</h1>
+    <h1 class="text-left text-6xl mb-5 text-zorange font-thin tracking-tighter lg:text-7xl">{{currentUser.username}}'s lists</h1>
     <ul role="list" class="space-y-3">
+      {{!-- {{currentUser.username}} --}}
+      
       {{#each alllists}}
-        <li class="bg-black shadow overflow-hidden rounded-md px-6 py-4 flex justify-between">
+        {{!-- {{../currentUser.username }} --}}
+        {{#ifCond this.createdby ../currentUser.username }}
+          <li class="bg-black shadow overflow-hidden rounded-md px-6 py-4 flex justify-between">
           <a href="/myqueue/view/{{this._id}}" class="break-all bg-black text-zmagenta font-thin tracking-tighter hover:text-zorange sm:text-md lg:text-xl">
             {{this.name}}
           </a>
@@ -25,6 +29,7 @@
             </form>
           </span>
       </li>
+        {{/ifCond}}
       {{/each}}
       {{#if newlist}}
       <form action="/myqueue/new" method="POST">
@@ -38,12 +43,17 @@
           required autofocus
         />
       </li>
-        <button type="submit" class="mt-3 w-full text-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-zmagenta hover:bg-zorange focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zorange">
+      <div class="flex justify-between">
+        <button type="submit" class=" w-2/5 mt-3  text-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-zmagenta hover:bg-zorange focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zorange">
           save list
         </button>
+        <a href="/myqueue" class="w-2/5 mt-3 block text-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-zmagenta hover:bg-zorange focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zorange">
+          cancel
+        </a>
+        </div>
       </form>
       {{else}}
-      <a href="/myqueue/new" class="block w-full text-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-zmagenta hover:bg-zorange focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zorange">
+      <a href="/myqueue/new" class="w-full block text-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-zmagenta hover:bg-zorange focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zorange">
         create new
       </a>
       {{/if}}
@@ -53,11 +63,10 @@
   </div>
   <div class="basis-2/3 pl-3">
     <!-- This example requires Tailwind CSS v2.0+ -->
-    <h1 class="text-left text-6xl mb-5 text-zorange font-thin tracking-tighter lg:text-7xl">details</h1>
+    <h1 class="text-left text-6xl mb-5 text-zorange font-thin tracking-tighter lg:text-7xl">details for {{details.name}}</h1>
     <div class="bg-black shadow overflow-hidden rounded-md">
         <fieldset class="px-6 py-6">
-        {{#each editlist}}
-          {{#each songs}}
+          {{#each details.songs}}
             <div>
               <div class="relative flex items-start py-4">
                 <div class="min-w-0 flex-1 text-sm">
@@ -70,7 +79,6 @@
               </div>
             </div>
             {{/each}}
-        {{/each}}
         </fieldset>
     </div>
     <button type="button" class="w-36 mt-3 text-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-zmagenta hover:bg-zorange focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zorange">
@@ -79,6 +87,62 @@
     <button type="button" class="w-36 mt-3 ml-3 text-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-zorange hover:bg-zmagenta focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zmagenta">
           save on brain
     </button>
+  </div>
+
+  <div class="basis-2/3 pl-3">
+    <!-- This example requires Tailwind CSS v2.0+ -->
+    <h1 class="text-left text-6xl mb-5 text-zorange font-thin tracking-tighter lg:text-7xl">edit list</h1>
+    <form action="/myqueue/edit/{{editlist._id}}" method="POST">
+    <ul role="list" class="space-y-3">
+      <li class="bg-black shadow overflow-hidden rounded-md px-6 py-4">
+        <input
+          type="text"
+          name="name"
+          id="name"
+          class="focus:ring-zmagenta focus:border-zmagenta bg-black text-zorange font-thin tracking-tighter block w-full rounded-md sm:text-md border-gray-700 lg:text-lg"
+          placeholder="name"
+          value="{{editlist.name}}"
+          required autofocus
+        />
+      </li>
+      </ul>
+      {{!-- <div class="flex justify-between">
+        <button type="submit" class=" w-2/5 mt-3  text-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-zmagenta hover:bg-zorange focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zorange">
+          save list
+        </button>
+        <a href="/myqueue" class="w-2/5 mt-3 block text-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-zmagenta hover:bg-zorange focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zorange">
+          cancel
+        </a>
+        </div> --}}
+      
+    <div class="bg-black shadow overflow-hidden rounded-md">
+        <fieldset class="px-6 py-6">
+
+          {{#each allUserSongs}}
+          {{#ifCond this.selectedby ../currentUser.username }}
+            <div class="flex flex-row">
+              <div>
+                <img src="{{cover}}" alt="">
+              </div>
+              <div class="relative flex items-start py-4">
+                <div class="min-w-0 flex-1 text-sm">
+                  <label for="songs" class="font-medium text-zmagenta">{{name}}</label>
+                  <p id="songs-description" class="text-zorange">{{_id}}</p>
+                </div>
+                <div class="ml-3 flex items-center h-5">
+                  <input id="songs" aria-describedby="song-description" name="songs" type="checkbox" value="{{_id}}" class="focus:ring-zmagenta h-4 w-4 text-zmagenta border-gray-300 rounded">
+                </div>
+              </div>
+            </div>
+            {{/ifCond}}
+            {{/each}}
+        </fieldset>
+    </div>
+    <button type="submit" class="w-36 mt-3 text-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-zmagenta hover:bg-zorange focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zorange">
+          save queue
+        </button>
+        </form>
+    
   </div>
   
 </div>

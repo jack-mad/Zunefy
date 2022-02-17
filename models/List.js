@@ -9,8 +9,8 @@ const ListSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectID,
         ref: "Song"
     }],
-    urlSpotify: String,
-    type: String
+    type: String,
+    createdby: String,
 },
 {
     timestamps: true
