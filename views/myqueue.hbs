@@ -6,29 +6,28 @@
     <h1 class="text-left text-6xl mb-5 text-zorange font-thin tracking-tighter lg:text-7xl">{{currentUser.username}}'s lists</h1>
     <ul role="list" class="space-y-3">
       {{!-- {{currentUser.username}} --}}
-      
       {{#each alllists}}
         {{!-- {{../currentUser.username }} --}}
         {{#ifCond this.createdby ../currentUser.username }}
           <li class="bg-black shadow overflow-hidden rounded-md px-6 py-4 flex justify-between">
-          <a href="/myqueue/view/{{this._id}}" class="break-all bg-black text-zmagenta font-thin tracking-tighter hover:text-zorange sm:text-md lg:text-xl">
-            {{this.name}}
-          </a>
-          <span class="flex">
-            <a href="/myqueue/edit/{{this._id}}">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="white">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-              </svg>
+            <a href="/myqueue/view/{{this._id}}" class="break-all bg-black text-zmagenta font-thin tracking-tighter hover:text-zorange sm:text-md lg:text-xl">
+              {{this.name}}
             </a>
-            <form action="/myqueue/delete/{{this._id}}" method="POST">
-              <button class="bg-black -mb-3 ml-1">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="red">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-              </svg>
-              </button>
-            </form>
-          </span>
-      </li>
+            <span class="flex">
+              <a href="/myqueue/edit/{{this._id}}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="white">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                </svg>
+              </a>
+              <form action="/myqueue/delete/{{this._id}}" method="POST">
+                <button class="bg-black -mb-3 ml-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="red">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+                </button>
+              </form>
+            </span>
+        </li>
         {{/ifCond}}
       {{/each}}
       {{#if newlist}}
@@ -57,94 +56,111 @@
         create new
       </a>
       {{/if}}
-
-      <!-- More items... -->
     </ul>
   </div>
+
+  {{#if edit }}
+  <div class="basis-2/3 pl-3">
+    <h1 class="text-left text-6xl mb-5 text-zorange font-thin tracking-tighter lg:text-7xl">edit list</h1>
+    <form action="/myqueue/edit/{{editlist._id}}" method="POST">
+      <ul role="list" class="space-y-3">
+        <li class="bg-black shadow overflow-hidden rounded-md px-6 py-4">
+          <input
+            type="text"
+            name="name"
+            id="name"
+            class="focus:ring-zmagenta focus:border-zmagenta bg-black text-zorange font-thin tracking-tighter block w-full rounded-md sm:text-md border-gray-700 lg:text-lg"
+            placeholder="name"
+            value="{{editlist.name}}"
+            required autofocus
+          />
+        </li>
+      </ul>
+      <div class="bg-black shadow rounded-md mt-3 max-h-96 overscroll-contain overflow-auto">
+          <fieldset class="px-6 py-6">
+            {{#each allUserSongs}}
+              {{#ifCond this.selectedby ../currentUser.username }}
+                  <div>
+                <div class="relative flex items-start py-4">
+                  <img src="{{cover}}" alt="" class="mr-3">
+                  <div class="min-w-0 flex-1 text-sm mr-28">
+                    <label for="songs" class="font-medium text-zmagenta ">{{name}}</label>
+                    <p id="songs-description" class="text-zorange">{{artists}}</p>
+                  </div>
+                  {{#if this.preview_url}}
+                    <audio class="mt-3 h-8 w-1/3"src={{this.preview_url}} controls></audio>
+                  {{else}}
+                    <p class="mt-2 text-md  font-medium text-zorange truncate pointer-events-none"
+                      >Preview not available</p>
+                  {{/if}}
+                  <div class="ml-5 mt-4 flex items-center h-6">
+                    
+                    <input id="songs" aria-describedby="songs-description" name="songs" type="checkbox" value="{{_id}}" class="focus:ring-zmagenta h-4 w-4 text-zmagenta border-gray-300 rounded"
+                    >
+                    {{#ifIn this ../editlist.songs}}
+                    {{!-- <p class="text-zorange">checked</p>  --}}
+                    {{else}}
+                    {{!-- <p class="text-zorange">notchecked</p>  --}}
+                    {{/ifIn}}
+                    
+                  </div>
+                </div>
+              </div>
+                {{/ifCond}}
+              {{/each}}
+          </fieldset>
+      </div>
+      <button type="submit" class="w-36 mt-3 text-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-zmagenta hover:bg-zorange focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zorange">
+            save queue
+      </button>
+    </form>
+  </div>
+  {{else}}
   <div class="basis-2/3 pl-3">
     <!-- This example requires Tailwind CSS v2.0+ -->
-    <h1 class="text-left text-6xl mb-5 text-zorange font-thin tracking-tighter lg:text-7xl">details for {{details.name}}</h1>
+    <h1 class="text-left text-6xl mb-5 text-zorange font-thin tracking-tighter lg:text-7xl">details</h1>
+    {{#if viewlist }}
     <div class="bg-black shadow overflow-hidden rounded-md">
         <fieldset class="px-6 py-6">
-          {{#each details.songs}}
-            <div>
+          {{#if details.songs}}
+            {{#each details.songs}}
+              <div>
+                <div class="relative flex items-start py-4">
+                  <div class="min-w-0 flex-1 text-sm">
+                    <label for="comments" class="font-medium text-zmagenta">{{name}}</label>
+                    <p id="comments-description" class="text-zorange">{{_id}}</p>
+                  </div>
+                  <div class="ml-3 flex items-center h-5">
+                    <input id="comments" aria-describedby="comments-description" name="comments" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                  </div>
+                </div>
+              </div>
+            {{/each}}
+          {{else}}
+             <div>
               <div class="relative flex items-start py-4">
                 <div class="min-w-0 flex-1 text-sm">
-                  <label for="comments" class="font-medium text-zmagenta">{{name}}</label>
-                  <p id="comments-description" class="text-zorange">{{_id}}</p>
+                  <label for="comments" class="font-medium text-zmagenta">There's nothing yet</label>
+                  <p id="comments-description" class="text-zorange">Click edit icon for add music</p>
                 </div>
                 <div class="ml-3 flex items-center h-5">
                   <input id="comments" aria-describedby="comments-description" name="comments" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
                 </div>
               </div>
             </div>
-            {{/each}}
+            {{/if}}
         </fieldset>
     </div>
-    <button type="button" class="w-36 mt-3 text-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-zmagenta hover:bg-zorange focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zorange">
-          save queue
-        </button>
-    <button type="button" class="w-36 mt-3 ml-3 text-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-zorange hover:bg-zmagenta focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zmagenta">
-          save on brain
-    </button>
-  </div>
-
-  <div class="basis-2/3 pl-3">
-    <!-- This example requires Tailwind CSS v2.0+ -->
-    <h1 class="text-left text-6xl mb-5 text-zorange font-thin tracking-tighter lg:text-7xl">edit list</h1>
-    <form action="/myqueue/edit/{{editlist._id}}" method="POST">
-    <ul role="list" class="space-y-3">
-      <li class="bg-black shadow overflow-hidden rounded-md px-6 py-4">
-        <input
-          type="text"
-          name="name"
-          id="name"
-          class="focus:ring-zmagenta focus:border-zmagenta bg-black text-zorange font-thin tracking-tighter block w-full rounded-md sm:text-md border-gray-700 lg:text-lg"
-          placeholder="name"
-          value="{{editlist.name}}"
-          required autofocus
-        />
-      </li>
-      </ul>
-      {{!-- <div class="flex justify-between">
-        <button type="submit" class=" w-2/5 mt-3  text-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-zmagenta hover:bg-zorange focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zorange">
-          save list
-        </button>
-        <a href="/myqueue" class="w-2/5 mt-3 block text-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-zmagenta hover:bg-zorange focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zorange">
-          cancel
-        </a>
-        </div> --}}
-      
+    {{else}}
     <div class="bg-black shadow overflow-hidden rounded-md">
-        <fieldset class="px-6 py-6">
-
-          {{#each allUserSongs}}
-          {{#ifCond this.selectedby ../currentUser.username }}
-            <div class="flex flex-row">
-              <div>
-                <img src="{{cover}}" alt="">
-              </div>
-              <div class="relative flex items-start py-4">
-                <div class="min-w-0 flex-1 text-sm">
-                  <label for="songs" class="font-medium text-zmagenta">{{name}}</label>
-                  <p id="songs-description" class="text-zorange">{{_id}}</p>
-                </div>
-                <div class="ml-3 flex items-center h-5">
-                  <input id="songs" aria-describedby="song-description" name="songs" type="checkbox" value="{{_id}}" class="focus:ring-zmagenta h-4 w-4 text-zmagenta border-gray-300 rounded">
-                </div>
-              </div>
-            </div>
-            {{/ifCond}}
-            {{/each}}
-        </fieldset>
+      <fieldset class="px-6 py-6">
+        <label for="comments" class="font-ligth text-xl tracking-tighter text-zmagenta">No list selected</label>
+        <p id="comments-description" class="text-zorange">Please select a list </p>
+      </fieldset>
     </div>
-    <button type="submit" class="w-36 mt-3 text-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-zmagenta hover:bg-zorange focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zorange">
-          save queue
-        </button>
-        </form>
-    
+    {{/if}}
   </div>
-  
+  {{/if}}
 </div>
 
 <div>

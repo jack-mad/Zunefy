@@ -6,24 +6,25 @@ exports.getSignup = (req, res) => {
     res.render('auth/signup');
 }
 exports.postSignup = async (req, res) => {
-    const { username, password } = req.body;
+    const { username, password, name, avatar } = req.body;
     if (!username || !password) {
         return res.render('auth/signup',{
             errorMessage: 'Todos los campos deben ser llenados.'
         })
     };
-    // const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/
-    // if(!regex.test(password)){
-	// 	return res.render("auth/signup", {
-	// 		errorMessage: "Tu contraseña debe tener al menos 6 caracteres, una mayuscula y un numero"
-	// 	})
-	// }
+    const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/
+    if(!regex.test(password)){
+		return res.render("auth/signup", {
+			errorMessage: "Tu contraseña debe tener al menos 6 caracteres, una mayuscula y un numero"
+		})
+	}
     const salt = await bcryptjs.genSalt(10);
     const hashPassword = await bcryptjs.hash(password,salt);
     try {
         const newUser = await User.create({
             username,
-            password: hashPassword
+            password: hashPassword,
+            name, avatar
         })
         console.log(newUser);
         return res.redirect('/auth/signin')

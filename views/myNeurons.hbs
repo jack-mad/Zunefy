@@ -1,0 +1,40 @@
+<h1 class="text-8xl mb-2 text-zmagenta font-thin tracking-tighter lg:text-9xl">myNeurons</h1>
+
+<div class="mb-5 flex flex-row flex-wrap">
+  <div class="pr-3">
+      <!-- This example requires Tailwind CSS v2.0+ -->
+    <h1 class="text-left text-6xl mb-5 text-zorange font-thin tracking-tighter lg:text-7xl">{{currentUser.username}}'s music library</h1>
+
+    <div class="mb-5 mt-10">
+      <ul
+        role="list"
+        class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-5 xl:gap-x-8"
+      >
+      {{#each allUserSongs}}
+        {{#ifCond this.selectedby ../currentUser.username }}
+          <li class="relative">
+            <div class="flex justify-between">
+              <img src="{{cover}}" alt="" class="object-cover pointer-events-none mr-5" />
+              <span class="truncate w-5/6">
+                <p
+                  class="mt-2 block text-md font-medium text-zmagenta pointer-events-none"
+                >{{name}}</p>
+                  <p class="text-sm font-ligth text-white truncate">{{artists}} </a>
+              </span>
+            </div>
+            {{#if this.preview_url}}
+              <audio class="mt-3 h-8 w-full"src={{this.preview_url}} controls></audio>
+              {{else}}
+              <p class="mt-2 block text-md font-medium text-zorange truncate pointer-events-none"
+                >Preview not available</p>
+              {{/if}}
+          </li>
+        {{/ifCond}}
+      {{/each}}
+      </ul>
+    </div> 
+  </div>
+</div>
+<div>
+  <br><br><br><br><br><br><br>
+</div>

@@ -104,41 +104,7 @@
   </ul>
 </div>
 
-<h1
-  class="text-6xl mb-5 text-zorange font-thin tracking-tighter lg:text-7xl"
->Add</h1>
 
-<div class="mb-5" id="add">
-  <ul
-    role="list"
-    class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-5 xl:gap-x-8"
-  >
-    {{#each allpool}}
-      <li class="relative">
-        <div
-          class="group block w-full aspect-w-10 aspect-h-7 bg-zorange focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-zorange overflow-hidden"
-        >
-        {{!-- /music/album/{{this.album.id}} --}}
-          <a href=""><img 
-              src="{{this.cover}}"
-              alt=""
-              class="object-cover pointer-events-none group-hover:opacity-75"
-            /></a>
-        </div>
-        <div class="flex justify-between">
-          <span class="truncate w-5/6">
-            <p
-              class="mt-2 block text-md font-medium text-zmagenta pointer-events-none"
-            >{{this.name}}</p>
-              <p
-                class="text-sm font-ligth text-white"
-              >{{this.artists}}</p>
-          </span> 
-        </div>
-      </li>
-    {{/each}}
-  </ul>
-</div>
 <div>
   <br><br><br><br><br><br><br>
 </div>

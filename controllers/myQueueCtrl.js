@@ -12,7 +12,7 @@ exports.getViewList = async (req, res) => {
     const { id } = req.params;
     const getOneList = await List.findById(id).populate('songs');
     console.log(getOneList)
-    res.render('myqueue', { details: getOneList , alllists: lists});
+    res.render('myqueue', { details: getOneList , alllists: lists , viewlist : true});
 }
 
 exports.getNewList = async (req, res) => {
@@ -37,6 +37,7 @@ exports.getEditList = async (req, res) => {
     const allUserSongs = await Song.find({});
     const { id } = req.params;
     const getOneList = await List.findById(id).populate('songs');
+    console.log(getOneList);
     res.render('myqueue', { editlist: getOneList , edit: true , alllists: lists , allUserSongs: allUserSongs});
 }
 
@@ -55,4 +56,9 @@ exports.deleteList = async (req, res) => {
     const { id } = req.params;
     await List.findByIdAndDelete(id);
     res.redirect('/myqueue')
+}
+exports.getAllTracks = async (req, res) => {
+    const allUserSongs = await Song.find({});
+    res.render('myNeurons', { allUserSongs: allUserSongs});
+
 }

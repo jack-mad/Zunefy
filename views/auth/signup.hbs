@@ -1,41 +1,107 @@
-<div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
   <div class="max-w-md w-full space-y-8">
     <div>
-      <h2 class="mt-6 text-5xl font-thin tracking-tighter text-zorange">registrarse</h2>
+      <h2 class="text-5xl font-thin tracking-tighter text-zorange">sign up</h2>
     </div>
     <form class="mt-8 space-y-6" action="/auth/signup" method="POST">
       <div class="rounded-md shadow-sm -space-y-px">
+        
         <div>
           <label for="username" class="sr-only">username</label>
-          <input id="username" name="username" type="text" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-zmagenta focus:border-zmagenta focus:z-10 sm:text-sm" placeholder="usuario">
+          <input id="username" name="username" type="text" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-zmagenta focus:border-zmagenta focus:z-10 sm:text-sm" placeholder="username">
+        </div>
+        <div>
+          <label for="name" class="sr-only">name</label>
+          <input id="name" name="name" type="text" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-zmagenta focus:border-zmagenta focus:z-10 sm:text-sm" placeholder="superstar name">
         </div>
         <div>
           <label for="password" class="sr-only">password</label>
-          <input id="password" name="password" type="password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-zmagenta focus:border-zmagenta focus:z-10 sm:text-sm" placeholder="contraseña">
+          <input id="password" name="password" type="password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-zmagenta focus:border-zmagenta focus:z-10 sm:text-sm" placeholder="password">
+        </div>
+        <div>
+          
+          <fieldset class="mt-5 ">
+            <div class="flex justify-between">
+              <div class="flex align-center">
+                <label for="a1">
+                  <img src="/img/a1.png" alt="" class="h-16 w-16 rounded-full">
+                </label>
+                <input type="radio" value="a1" id="a1" name="avatar" class="mt-6 ml-2 " required>
+              </div>
+              <div class="flex align-center">
+                <label for="a5">
+                  <img src="/img/a5.png" alt="" class="h-16 w-16 rounded-full">
+                </label>
+                <input type="radio" value="a5" id="a5" name="avatar" class="mt-6 ml-2 " required>
+              </div>
+              <div class="flex align-center">
+                <label for="a2">
+                  <img src="/img/a2.png" alt="" class="h-16 w-16 rounded-full">
+                </label>
+                <input type="radio" value="a2" id="a2" name="avatar" class="mt-6 ml-2 " required>
+              </div>
+              <div class="flex align-center">
+                <label for="a6">
+                  <img src="/img/a6.png" alt="" class="h-16 w-16 rounded-full">
+                </label>
+                <input type="radio" value="a6" id="a6" name="avatar" class="mt-6 ml-2 " required>
+              </div>
+            </div>
+            <div class="mt-3 flex justify-between">
+              <div class="flex align-center">
+                <label for="a3">
+                  <img src="/img/a3.png" alt="" class="h-16 w-16 rounded-full">
+                </label>
+                <input type="radio" value="a3" id="a3" name="avatar" class="mt-6 ml-2 " required>
+              </div>
+              <div class="flex align-center">
+                <label for="a7">
+                  <img src="/img/a7.png" alt="" class="h-16 w-16 rounded-full">
+                </label>
+                <input type="radio" value="a7" id="a7" name="avatar" class="mt-6 ml-2 " required>
+              </div>
+              <div class="flex align-center">
+                <label for="a4">
+                  <img src="/img/a4.png" alt="" class="h-16 w-16 rounded-full">
+                </label>
+                <input type="radio" value="a4" id="a4" name="avatar" class="mt-6 ml-2 " required>
+              </div>
+              <div class="flex align-center">
+                <label for="a8">
+                  <img src="/img/a8.png" alt="" class="h-16 w-16 rounded-full">
+                </label>
+                <input type="radio" value="a8" id="a8" name="avatar" class="mt-6 ml-2 required">
+              </div>
+            </div>
+            
+          </fieldset>
         </div>
       </div>
       {{#if errorMessage}}
         <div class="bg-black border-l-4 border-zorange p-4">
         <div class="flex">
             <div class="flex-shrink-0">
-            <!-- Heroicon name: solid/exclamation -->
-            <svg class="h-5 w-5 text-zorange" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-            </svg>
+              <svg class="h-5 w-5 text-zorange" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+              </svg>
             </div>
             <div class="ml-3">
-            <p class="text-sm text-zorange">
-                {{errorMessage}}
-            </p>
+              <p class="text-sm text-zorange">
+                  {{errorMessage}}
+              </p>
             </div>
         </div>
         </div>
     {{/if}}
       <div>
         <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-zmagenta focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zorange">
-          registrarse       
+          register       
         </button>
       </div>
     </form>
   </div>
+</div>
+
+<div>
+  <br><br><br><br><br><br><br>
 </div>

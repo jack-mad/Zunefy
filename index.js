@@ -27,6 +27,14 @@ hbs.registerHelper('ifCond', function(v1, v2, options) {
 hbs.registerHelper("setVar", function(varName, varValue, options) {
     options.data.root[varName] = varValue;
 });
+
+hbs.registerHelper('ifIn', function(elem, list, options) { //https://axiacore.com/blog/check-if-item-array-handlebars-547/
+  if(list.indexOf(elem) > -1) {
+    return options.fn(this);
+  }
+  return options.inverse(this);
+});
+
 //routes
 app.use((req, res, next) => {
     //console.log(req.session.currentUser)

@@ -11,12 +11,10 @@ const userSchema = mongoose.Schema({
         required: true
     },
     name: {
-        type:String,
-        default: "cute girl"
+        type:String
     },
     avatar:{
-        type:String,
-        default: "https://i.pinimg.com/550x/51/0b/fb/510bfb16b32f08aff3938a0cbcb847a2.jpg"
+        type:String
     },
     storage:{
         type: Number,

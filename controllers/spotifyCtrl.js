@@ -1,5 +1,5 @@
 const SpotifyWebApi = require('spotify-web-api-node');
-const { search } = require('../routes');
+// const { search } = require('../routes');
 
 const spotifyApi = new SpotifyWebApi({
     clientId: process.env.CLIENT_ID,
@@ -19,7 +19,6 @@ exports.getFeed = async (req, res) => {
     } catch (error) {
         console.log("Something went wrong!", error);
     }
-    
 }
 
 exports.getAlbum = async (req, res) => {
