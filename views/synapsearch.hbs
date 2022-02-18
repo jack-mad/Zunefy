@@ -58,7 +58,7 @@
           class="group block w-full aspect-w-10 aspect-h-7 bg-zorange focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-zorange overflow-hidden"
         >
         {{!-- /music/album/{{this.album.id}} --}}
-          <a href=""><img 
+          <a href="/music/album/{{this.album.id}}"><img 
               src="{{this.album.images.1.url}}"
               alt=""
               class="object-cover pointer-events-none group-hover:opacity-75"
@@ -66,9 +66,9 @@
         </div>
         <div class="flex justify-between">
           <span class="truncate w-5/6">
-            <p
+            <span
               class="mt-2 block text-md font-medium text-zmagenta pointer-events-none"
-            >{{name}}</p>
+            >{{name}}</span>
             {{#each artists}}
               <a
                 href="/music/artist/{{this.id}}"

@@ -25,7 +25,7 @@ exports.getAlbum = async (req, res) => {
     const {albumID} = req.params
     try {
         const getOneAlbum = await spotifyApi.getAlbum(albumID);
-        console.log(getOneAlbum.body);
+        console.log(getOneAlbum.body.tracks.items);
         return res.render('music/album', { album: getOneAlbum.body});
     } catch (error) {
         console.log("Something went wrong!", error);
@@ -35,12 +35,16 @@ exports.getArtist = async (req, res) => {
     const {artistID} = req.params
     try {
         const getOneArtist = await spotifyApi.getArtist(artistID);
+        const getArtistTop = await spotifyApi.getArtistTopTracks(artistID,'MX');
         console.log(getOneArtist.body);
-        return res.render('music/artist', { artist: getOneArtist.body});
+        console.log(getArtistTop.body.tracks);
+        return res.render('music/artist', { artist: getOneArtist.body, topTracks: getArtistTop.body.tracks});
     } catch (error) {
         console.log("Something went wrong!", error);
     }
 }
+
+
 exports.searchTracks = async (req, res) => {
     const query = req.query.q
     try {
